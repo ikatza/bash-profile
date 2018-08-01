@@ -18,7 +18,6 @@ done
 
 
 if [ -d ~/bin ]
-	then cp -d bin/* ~/bin
-else cp -rd bin ~/bin
+	then cp bin/* ~/bin
+else cp -r bin ~/bin
 fi
-

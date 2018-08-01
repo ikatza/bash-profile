@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+export LANG=en_US.UTF-8
+
 os=`uname -s`
 whoami=`who | awk '{print $1}' | head -1`
 
@@ -79,24 +81,40 @@ On_IWhite='\e[0;107m'   # White
 ### modifications to history settings ###
 #########################################
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoreboth
+# # don't put duplicate lines in the history. See bash(1) for more options
+# # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+# HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
+# # ... or force ignoredups and ignorespace
+# HISTCONTROL=ignoreboth
 
-HISTIGNORE="reboot:shutdown *:ls:pwd:exit:mount:man *:history"
+# HISTIGNORE="reboot:shutdown *:ls:pwd:exit:mount:man *:history"
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+# # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+# export HISTSIZE=10000
+# export HISTFILESIZE=10000
 
-# Add timestamp to history file.
-export HISTTIMEFORMAT="%F %T "
+# # Add timestamp to history file.
+# export HISTTIMEFORMAT="%F %T "
 
-#append to history, don't overwrite
-shopt -s histappend
-PROMPT_COMMAND='history -a'
+# #append to history, don't overwrite
+# shopt -s histappend
+# PROMPT_COMMAND='history -a'
+
+# Eternal bash history.
+# ---------------------
+# Undocumented feature which sets the size to "unlimited".
+# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTTIMEFORMAT="[%F %T] "
+HISTCONTROL=erasedups
+# Change the file location because certain bash sessions truncate .bash_history file upon close.
+# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+export HISTFILE=~/.bash_eternal_history
+# Force prompt to write history after every command.
+# http://superuser.com/questions/20900/bash-history-loss
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
 
 #########################################
 ### end #################################
@@ -149,9 +167,21 @@ if [[ $os == "Linux" ]]; then
     elif [ -e /etc/bash_completion.d/git ]; then
         git_completion="/etc/bash_completion.d/git"
     fi
+# elif [[ $os == "Darwin" ]]; then
+#     git_completion="/usr/local/etc/bash_completion.d/git-completion.bash"
+#     . $git_completion
 elif [[ $os == "Darwin" ]]; then
-    git_completion="/opt/local/share/doc/git-core/contrib/completion/git-completion.bash"
-    . $git_completion
+     [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+     source /usr/local/etc/bash_completion.d/git-completion.bash
+
+     GIT_PS1_SHOWDIRTYSTATE=true
+     export PS1='[\u@mbp \w$(__git_ps1)]\$ '
+
+     if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+         __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
+         source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
+fi
+
 else
     unset git_completion
 fi
@@ -218,21 +248,29 @@ if [ -f ~/.bash_aliases.$whoami ]; then
     . ~/.bash_aliases.$whoami
 fi
 
-export EDITOR="vim"
+export EDITOR="nano"
 
 #feels like root, even when you aren't
-export PATH=$PATH:/usr/local/sbin:/sbin/:/usr/sbin
-#if we are on mac, include port installed stuff
+#export PATH=$PATH:/usr/local/sbin:/sbin/:/usr/sbin
+# OS X related stuff
 if [[ $os == "Darwin" ]]; then
-    export PATH=$PATH:/opt/local/bin/
+   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+   . $(brew --prefix root6)/bin/thisroot.sh
+   # added by Anaconda3 installer
+   export PATH="/Users/icaza/anaconda3/bin:$PATH"
+
 fi
 #include bin directory in users homedir
 if [ -d ~/bin ]; then
     export PATH=$PATH:~/bin
 fi
+if [ -d ~/Scripts ]; then
+    export PATH=$PATH:~/Scripts
+fi
+
 
 #work-around for libnss3/sipe (http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=649456)
-export NSS_SSL_CBC_RANDOM_IV=0
+#export NSS_SSL_CBC_RANDOM_IV=0
 
 #################################################################
 ### start #######################################################
@@ -250,6 +288,12 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+if [[ $os == "Darwin" ]]; then
+   [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+   source /usr/local/etc/bash_completion.d/pass
+fi
+
 
 #################################################################
 ### end #########################################################
@@ -273,7 +317,7 @@ start_agent() {
         }
 
 cleanup() {
-        # soemthing wrong, flatten all
+        # something wrong, flatten all
         rm -rf $tmpdir
         killall ssh-agent
         }
