@@ -139,7 +139,7 @@ esac
 #######################################################
 color_prompt=true
 
-PS1='\u@\h:\w'
+# PS1='\u@\h:\w'
 
 #GNU Screen aware prompt
 if [[ "$STY" ]] ; then
@@ -159,64 +159,88 @@ xterm*|rxvt*)
     ;;
 esac
 
-#git aware prompt
-#assume we are on linux, unless we know we are on mac
-if [[ $os == "Linux" ]]; then
-    if [ -e /usr/share/bash-completion/completions/git ]; then
-        git_completion="/usr/share/bash-completion/completions/git"
-    elif [ -e /etc/bash_completion.d/git ]; then
-        git_completion="/etc/bash_completion.d/git"
-    fi
+# GIT_PROMPT_ONLY_IN_REPO=1
+GIT_PROMPT_THEME=Solarized_UserHost_Icaza
+
+# GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+# GIT_PROMPT_IGNORE_SUBMODULES=1 # uncomment to avoid searching for changed files in submodules
+
+# GIT_PROMPT_SHOW_UPSTREAM=1 # uncomment to show upstream tracking branch
+# GIT_PROMPT_SHOW_UNTRACKED_FILES=normal # can be no, normal or all; determines counting of untracked files
+
+# GIT_PROMPT_SHOW_CHANGED_FILES_COUNT=0 # uncomment to avoid printing the number of changed files
+
+# GIT_PROMPT_STATUS_COMMAND=gitstatus_pre-1.7.10.sh # uncomment to support Git older than 1.7.10
+
+# GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
+# GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
+
+# as last entry source the gitprompt script
+# GIT_PROMPT_THEME=Custom # use custom theme specified in file GIT_PROMPT_THEME_FILE (default ~/.git-prompt-colors.sh)
+# GIT_PROMPT_THEME_FILE=~/.git-prompt-colors.sh
+# GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
+source ~/.bash-git-prompt/gitprompt.sh
+
+
+###########################################
+
+# #git aware prompt
+# #assume we are on linux, unless we know we are on mac
+# if [[ $os == "Linux" ]]; then
+#     if [ -e /usr/share/bash-completion/completions/git ]; then
+#         git_completion="/usr/share/bash-completion/completions/git"
+#     elif [ -e /etc/bash_completion.d/git ]; then
+#         git_completion="/etc/bash_completion.d/git"
+#     fi
+# # elif [[ $os == "Darwin" ]]; then
+# #     git_completion="/usr/local/etc/bash_completion.d/git-completion.bash"
+# #     . $git_completion
 # elif [[ $os == "Darwin" ]]; then
-#     git_completion="/usr/local/etc/bash_completion.d/git-completion.bash"
-#     . $git_completion
-elif [[ $os == "Darwin" ]]; then
-     [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-     source /usr/local/etc/bash_completion.d/git-completion.bash
+#      [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+#      source /usr/local/etc/bash_completion.d/git-completion.bash
 
-     GIT_PS1_SHOWDIRTYSTATE=true
-     export PS1='[\u@mbp \w$(__git_ps1)]\$ '
+#      export PS1='[\u@mbp \w$(__git_ps1)]\$ '
 
-     if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-         __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
-         source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
-fi
+#      if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+#          __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
+#          source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
+# fi
 
-else
-    unset git_completion
-fi
+# else
+#     unset git_completion
+# fi
 
-if [[ "$git_completion" ]]; then
-    if [ -f $git_completion ]; then
-        export GIT_PS1_SHOWDIRTYSTATE=true
-        export GIT_PS1_SHOWUNTRACKEDFILES=true
-        export GIT_PS1_SHOWSTASHSTATE=true
-        if [[ "$color_prompt" ]]; then
-            PS1="$PS1\$(__git_ps1 ' [\[\e[34;1m\]%s\[\e[0m\]]')"
-        else
-            PS1="$PS1\$(__git_ps1 ' [%s]')"
-        fi
-    fi
-fi
+# if [[ "$git_completion" ]]; then
+#     if [ -f $git_completion ]; then
+#         export GIT_PS1_SHOWDIRTYSTATE=true
+#         export GIT_PS1_SHOWUNTRACKEDFILES=true
+#         export GIT_PS1_SHOWSTASHSTATE=true
+#         if [[ "$color_prompt" ]]; then
+#             PS1="$PS1\$(__git_ps1 ' [\[\e[34;1m\]%s\[\e[0m\]]')"
+#         else
+#             PS1="$PS1\$(__git_ps1 ' [%s]')"
+#         fi
+#     fi
+# fi
 
-#svn aware prompt
-if [ -f ~/.bash/subversion-prompt ]
-then
-    SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches"
-    . ~/.bash/subversion-prompt
-    if [[ "$color_prompt" ]]; then
-        PS1="$PS1\[\e[34;1m\]\$(__svn_stat)\[\e[0m\]"
-    else
-        PS1="$PS1\$(__svn_stat)"
-    fi
-fi
+# #svn aware prompt
+# if [ -f ~/.bash/subversion-prompt ]
+# then
+#     SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches"
+#     . ~/.bash/subversion-prompt
+#     if [[ "$color_prompt" ]]; then
+#         PS1="$PS1\[\e[34;1m\]\$(__svn_stat)\[\e[0m\]"
+#     else
+#         PS1="$PS1\$(__svn_stat)"
+#     fi
+# fi
 
-uid=`id -u`
-if [ "$uid" == 0 ]; then
-    PS1="$PS1 # "
-else
-    PS1="$PS1 \$ "
-fi
+# uid=`id -u`
+# if [ "$uid" == 0 ]; then
+#     PS1="$PS1 # "
+# else
+#     PS1="$PS1 \$ "
+# fi
 
 #######################################################
 ### end ###############################################
