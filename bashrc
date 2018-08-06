@@ -230,11 +230,11 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-#enable colors for git
-if [ -f /usr/bin/git ]; then
-    git config --global color.diff True
-    git config --global color.branch True
-fi
+# #enable colors for git
+# if [ -f /usr/bin/git ]; then
+#     git config --global color.diff True
+#     git config --global color.branch True
+# fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
