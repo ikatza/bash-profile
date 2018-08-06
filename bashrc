@@ -255,11 +255,11 @@ export EDITOR="nano"
 # OS X related stuff
 if [[ $os == "Darwin" ]]; then
    export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-   . $(brew --prefix root6)/bin/thisroot.sh
+   . /Applications/root*/bin/thisroot.sh
    # added by Anaconda3 installer
    export PATH="/Users/icaza/anaconda3/bin:$PATH"
-
 fi
+
 #include bin directory in users homedir
 if [ -d ~/bin ]; then
     export PATH=$PATH:~/bin
