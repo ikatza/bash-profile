@@ -7,6 +7,8 @@
 
 export LANG=en_US.UTF-8
 
+export PROMPT_COMMAND='echo -ne "\033]0;$(whoami)@$(hostname)|${PWD##*/}\007"'
+
 os=`uname -s`
 whoami=`who | awk '{print $1}' | head -1`
 
