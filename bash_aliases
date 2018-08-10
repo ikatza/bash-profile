@@ -1,9 +1,52 @@
-#add some color to our terminal, if ls supports it
-ls_color_support=`ls --color 2>/dev/null 1>/dev/null ; echo $?`
-if [ $ls_color_support == "0" ]; then 
-    alias ls='ls --color=auto'
-    alias ll='ls --color=auto -l'
-    alias grep='grep --color=auto'
+alias cp='cp -iv'                           # careful and verbose
+alias mv='mv -iv'                           # careful and verbose
+alias mkdir='mkdir -pv'                     # create subdirs in necessary, verbose
+alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
+alias less='less -FSRXc'                    # Preferred 'less' implementation
+alias les='less'                            # Sloppy typing
+alias grep='grep --color=auto'              # colorful grep
+# cd() { builtin cd "$@"; ll; }             # Always list directory contents upon 'cd'
+alias ~="cd ~"                              # Go Home
+alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
+alias ..='cd ../'                           # Go back 1 directory level
+alias ...='cd ../../'                       # Go back 2 directory levels
+alias .3='cd ../../../'                     # Go back 3 directory levels
+alias .4='cd ../../../../'                  # Go back 4 directory levels
+alias .5='cd ../../../../../'               # Go back 5 directory levels
+alias .6='cd ../../../../../../'            # Go back 6 directory levels
+# alias edit='subl'                         # edit: Opens any file in sublime editor
+# alias c='clear'                           # c: Clear terminal display
+alias which='type -all'                     # which: Find executables
+alias path='echo -e ${PATH//:/\\n}'         # path: Echo all executable Paths
+alias show_options='shopt'                  # Show_options: display bash options settings
+alias fix_stty='stty sane'                  # fix_stty: Restore terminal settings when screwed up
+alias cic='set completion-ignore-case On'   # cic: Make tab-completion case-insensitive
+mcd () { mkdir -p "$1" && cd "$1"; }        # mcd: Makes new Dir and jumps inside
+
+
+#   lr:  Full Recursive Directory Listing
+#   ------------------------------------------
+alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'' | less'
+
+#   mans:   Search manpage given in agument '1' for term given in argument '2' (case insensitive)
+#           displays paginated result with colored search terms and two lines surrounding each hit.             Example: mans mplayer codec
+#   --------------------------------------------------------------------
+mans () {
+        man $1 | grep -iC2 --color=always $2 | less
+}
+
+#   showa: to remind yourself of an alias (given some part of it)
+#   ------------------------------------------------------------
+showa () { /usr/bin/grep --color=always -i -a1 $@ ~/Library/init/bash/aliases.bash | grep -v '^\s*$' | less -FSRXc ; }
+
+
+# OSX specific
+if [[ $os == "Darwin" ]]; then
+   alias f='open -a Finder ./'                 # f: Opens current directory in MacOS Finder
+   trash () { command mv "$@" ~/.Trash ; }     # trash: Moves a file to the MacOS trash
+   ql () { qlmanage -p "$*" >& /dev/null; }    # ql: Opens any file in MacOS Quicklook Preview
+   alias DT='tee ~/Desktop/terminalOut.txt'    # DT: Pipe content to file on MacOS Desktop
+
 fi
 
 # alias py='python'
@@ -11,6 +54,7 @@ alias py='python3'
 alias emacsclient=ec
 alias emacst='emacs -nw'
 alias h='history'
+alias roo='root -l'
 alias rooty='root -n -b -q'
 alias clipy='xclip -sel clip'
 alias dush='du -sh */*/* | sort -n | grep M'
@@ -18,37 +62,8 @@ alias ps2='ps -ef | grep -v $$ | grep -i '
 
 
 
-#careful copy, don't overwrite by default
-alias cp='cp -ip'
-
-#for those of us with lazy thumbs/stiff space bars
-alias cd..='cd ../'
-
 #check alias when querying 'which'
-# Doesn't work on Debian derived distros. Removing for now. 
+# Doesn't work on Debian derived distros. Removing for now.
 #alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
-
-# #openstack aliases which provide bash-completion support
-# NOVA_OUTPUT_LOG=$(mktemp)
-# GLANCE_OUTPUT_LOG=$(mktemp)
-# CINDER_OUTPUT_LOG=$(mktemp)
-# KEYSTONE_OUTPUT_LOG=$(mktemp)
-# export NOVA_OUTPUT_LOG GLANCE_OUTPUT_LOG CINDER_OUTPUT_LOG KEYSTONE_OUTPUT_LOG
-# _nova() {
-# 	nova $* | tee -a $NOVA_OUTPUT_LOG
-# }
-# alias nova="_nova $*"
-# _glance() {
-# 	glance $* | tee -a $GLANCE_OUTPUT_LOG
-# }
-# alias glance="_glance $*"
-# _cinder() {
-# 	cinder $* | tee -a $CINDER_OUTPUT_LOG
-# }
-# alias cinder="_cinder $*"
-# _keystone() {
-# 	keystone $* | tee -a $KEYSTONE_OUTPUT_LOG
-# }
-# alias keystone="_keystone $*"
 
 # alias ssh="~/.bash/try-mosh.sh $*"

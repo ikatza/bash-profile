@@ -7,6 +7,10 @@
 
 export LANG=en_US.UTF-8
 
+export PROMPT_COMMAND='echo -ne "\033]0;$(whoami)@$(hostname)|${PWD##*/}\007"'
+
+export EDITOR="nano"
+
 os=`uname -s`
 whoami=`who | awk '{print $1}' | head -1`
 
@@ -272,7 +276,6 @@ if [ -f ~/.bash_aliases.$whoami ]; then
     . ~/.bash_aliases.$whoami
 fi
 
-export EDITOR="nano"
 
 #feels like root, even when you aren't
 #export PATH=$PATH:/usr/local/sbin:/sbin/:/usr/sbin
