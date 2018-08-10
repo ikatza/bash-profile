@@ -2,7 +2,9 @@ alias cp='cp -iv'                           # careful and verbose
 alias mv='mv -iv'                           # careful and verbose
 alias mkdir='mkdir -pv'                     # create subdirs in necessary, verbose
 alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
-alias less='less -FSRXc'                    # Preferred 'less' implementation
+alias folders='ll | grep ^d'
+alias reload='source ~/.bash_profile'
+# alias less='less -FSRXc'                    # Preferred 'less' implementation
 alias les='less'                            # Sloppy typing
 alias grep='grep --color=auto'              # colorful grep
 # cd() { builtin cd "$@"; ll; }             # Always list directory contents upon 'cd'
@@ -16,7 +18,7 @@ alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 # alias edit='subl'                         # edit: Opens any file in sublime editor
 # alias c='clear'                           # c: Clear terminal display
-alias which='type -all'                     # which: Find executables
+alias whichs='type -all'                     # which: Find executables
 alias path='echo -e ${PATH//:/\\n}'         # path: Echo all executable Paths
 alias show_options='shopt'                  # Show_options: display bash options settings
 alias fix_stty='stty sane'                  # fix_stty: Restore terminal settings when screwed up
@@ -59,6 +61,7 @@ alias rooty='root -n -b -q'
 alias clipy='xclip -sel clip'
 alias dush='du -sh */*/* | sort -n | grep M'
 alias ps2='ps -ef | grep -v $$ | grep -i '
+alias ssh-tunnel='ssh -N -f -L localhost:9999:localhost:9999 '
 
 
 
