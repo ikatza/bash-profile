@@ -332,37 +332,37 @@ fi
 ### ssh related stuff, like ssh-agent ###
 #########################################
 
-## FIXME ## doesn't test ssh-add for success, should add that
+# ## FIXME ## doesn't test ssh-add for success, should add that
 
-tmpdir="/tmp/`whoami`"
-start_agent() {
-        mkdir -m700 $tmpdir
-        ssh-agent | grep -v echo > $tmpdir/agent.sh
-        chmod 600 $tmpdir/agent.sh
-        source $tmpdir/agent.sh
-        ssh-add
-        }
+# tmpdir="/tmp/`whoami`"
+# start_agent() {
+#         mkdir -m700 $tmpdir
+#         ssh-agent | grep -v echo > $tmpdir/agent.sh
+#         chmod 600 $tmpdir/agent.sh
+#         source $tmpdir/agent.sh
+#         ssh-add
+#         }
 
-cleanup() {
-        # something wrong, flatten all
-        rm -rf $tmpdir
-        killall ssh-agent
-        }
+# cleanup() {
+#         # something wrong, flatten all
+#         rm -rf $tmpdir
+#         killall ssh-agent
+#         }
 
-test=`ps -ef | grep [s]sh-agent | awk '{print $2}'`
-if [ "$test" != "" ]; then
-   # there is  an agent running, check for agent.sh file
-   if [ -e "$tmpdir/agent.sh" ]; then
-      source $tmpdir/agent.sh
-   else
-      # No agent.sh file, orphaned ssh-agent, kill it and restart it.
-      cleanup
-      start_agent
-   fi;
-else
-   # No ssh-agent running, starting a  new one
-   start_agent
-fi;
+# test=`ps -ef | grep [s]sh-agent | awk '{print $2}'`
+# if [ "$test" != "" ]; then
+#    # there is  an agent running, check for agent.sh file
+#    if [ -e "$tmpdir/agent.sh" ]; then
+#       source $tmpdir/agent.sh
+#    else
+#       # No agent.sh file, orphaned ssh-agent, kill it and restart it.
+#       cleanup
+#       start_agent
+#    fi;
+# else
+#    # No ssh-agent running, starting a  new one
+#    start_agent
+# fi;
 
 #########################################
 ### end #################################
