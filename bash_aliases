@@ -39,7 +39,7 @@ mans () {
 
 #   showa: to remind yourself of an alias (given some part of it)
 #   ------------------------------------------------------------
-showa () { /usr/bin/grep --color=always -i -a1 $@ ~/Library/init/bash/aliases.bash | grep -v '^\s*$' | less -FSRXc ; }
+showa () { /usr/bin/grep --color=always -i -a1 $@ ~/.bash_aliases | grep -v '^\s*$' ; }
 
 
 # OSX specific
