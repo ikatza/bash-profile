@@ -319,6 +319,7 @@ fi
 if [[ $os == "Darwin" ]]; then
    [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
    source /usr/local/etc/bash_completion.d/pass
+   source /usr/local/etc/bash_completion.d/brew
 fi
 
 

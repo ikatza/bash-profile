@@ -64,6 +64,10 @@ alias ps2='ps -ef | grep -v $$ | grep -i '
 alias ssh-tunnel='ssh -N -L localhost:9999:localhost:9998 ' # maybe add -f to have run on background?
 alias jupyter-tunnel='jupyter notebook --no-browser --port=9998'
 
+alias g='git'
+
+# Autocomplete for 'g' as well
+complete -o default -o nospace -F _git g
 
 
 #check alias when querying 'which'
