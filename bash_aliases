@@ -24,7 +24,7 @@ alias show_options='shopt'                  # Show_options: display bash options
 alias fix_stty='stty sane'                  # fix_stty: Restore terminal settings when screwed up
 alias cic='set completion-ignore-case On'   # cic: Make tab-completion case-insensitive
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd: Makes new Dir and jumps inside
-
+screenlog() { mkdir -p screenlogs && screen -U -L; }
 
 #   lr:  Full Recursive Directory Listing
 #   ------------------------------------------
