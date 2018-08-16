@@ -1,8 +1,10 @@
-if [ -f ~/.bashrc ]; then
-    source ~/.bashrc
+os=`uname -s`
+whoami=`who | awk '{print $1}' | head -1`
+
+if [ -f ~/.profile ]; then
+    source ~/.profile
 fi
 
-os=`uname -s`
 
 if [[ $os == "Linux" ]]; then
    export PATH='/its/home/id206/.linuxbrew/bin:/its/home/id206/.linuxbrew/sbin':"$PATH"

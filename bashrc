@@ -11,9 +11,6 @@ export PROMPT_COMMAND='echo -ne "\033]0;$(whoami)@$(hostname)|${PWD##*/}\007"'
 
 export EDITOR="nano"
 
-os=`uname -s`
-whoami=`who | awk '{print $1}' | head -1`
-
 #set some easily callable variables for colors
 Color_Off='\e[0m'       # Text Reset
 ### Regular Colors
