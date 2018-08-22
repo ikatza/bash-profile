@@ -209,15 +209,6 @@ if [ -f ~/.bash_aliases.$whoami ]; then
 fi
 
 
-#include bin directory in users homedir
-if [ -d ~/bin ]; then
-    export PATH=$PATH:~/bin
-fi
-if [ -d ~/Scripts ]; then
-    export PATH=$PATH:~/Scripts
-fi
-
-
 #################################################################
 ### start #######################################################
 ### tab completion extentions. tab completion makes life good ###
