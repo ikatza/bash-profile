@@ -223,16 +223,22 @@ fi
 ### tab completion extentions. tab completion makes life good ###
 #################################################################
 
-#tab completion for ssh hosts
-if [ -f ~/.ssh/known_hosts ]; then
-    complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
-fi
+# #tab completion for ssh hosts
+# if [ -f ~/.ssh/known_hosts ]; then
+#     complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
+# fi
 
 # enable programmable completion features (you don't need to enable
 # this if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
+fi
+
+if [[ $os == "Darwin" ]]; then
+   [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+   source /usr/local/etc/bash_completion.d/pass
+   source /usr/local/etc/bash_completion.d/brew
 fi
 
 
