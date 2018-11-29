@@ -55,6 +55,8 @@ fi
 alias py='python3'
 alias emacsclient=ec
 alias emacst='emacs -nw'
+alias emacstt='emacs -nw --quick'
+# alias emacs_custom emacs -q -l ~/my-init-file.el # support to load a specific init file
 alias h='history'
 alias roo='root -l'
 alias rooty='root -n -b -q'
