@@ -9,6 +9,7 @@ alias les='less'                            # Sloppy typing
 alias grep='grep --color=auto'              # colorful grep
 # cd() { builtin cd "$@"; ll; }             # Always list directory contents upon 'cd'
 alias ~="cd ~"                              # Go Home
+alias g.d="cd ~/Githubbies/"
 alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
 alias ..='cd ../'                           # Go back 1 directory level
 alias ...='cd ../../'                       # Go back 2 directory levels
@@ -45,10 +46,11 @@ showa () { /usr/bin/grep --color=always -i -a1 $@ ~/.bash_aliases | grep -v '^\s
 # OSX specific
 if [[ $os == "Darwin" ]]; then
    alias f='open -a Finder ./'                 # f: Opens current directory in MacOS Finder
+   alias locate='mdfind -name'
    trash () { command mv "$@" ~/.Trash ; }     # trash: Moves a file to the MacOS trash
    ql () { qlmanage -p "$*" >& /dev/null; }    # ql: Opens any file in MacOS Quicklook Preview
    alias DT='tee ~/Desktop/terminalOut.txt'    # DT: Pipe content to file on MacOS Desktop
-
+   alias lldb='PATH="/usr/bin:$PATH" lldb'
 fi
 
 # alias py='python'
@@ -61,11 +63,16 @@ alias h='history'
 alias roo='root -l'
 alias rooty='root -n -b -q'
 alias clipy='xclip -sel clip'
-alias dush='du -sh */*/* | sort -n | grep M'
 alias ps2='ps -ef | grep -v $$ | grep -i '
-alias Kinit='kdestroy -A ; kinit -Af -l 24h icaza@FNAL.GOV'
+alias Kinit='pass icaza@FNAL.GOV -c && kdestroy -A ; kinit -Af -l 24h icaza@FNAL.GOV'
 alias ssh-tunnel='ssh -N -L localhost:9999:localhost:9998 ' # maybe add -f to have run on background?
 alias jupyter-tunnel='jupyter notebook --no-browser --port=9998'
+
+if [[ $os == "Darwin" ]]; then
+   alias dush='du -sh * | gsort -h'
+elif [[ $os == "Linux" ]]; then
+     alias dush='du -sh * | sort -h'
+fi
 
 alias g='git'
 
