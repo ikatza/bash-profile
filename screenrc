@@ -1,2 +1,9 @@
+# no welcome message
+startup_message off
+
+# map screen to ^\
+escape ^|^|
+# escape ^`^`
+# escape ^jj
 termcapinfo xterm* ti@:te@
 logfile ./screenlogs/screen.%Y%m%d.log
