@@ -3,6 +3,14 @@ if [ -f ~/.profile.`whoami` ]; then
     source ~/.profile.`whoami`
 fi
 
+#include bin directory in users homedir
+if [ -d ~/bin ]; then
+    export PATH=$PATH:~/bin
+fi
+# if [ -d ~/Scripts ]; then
+#     export PATH=$PATH:~/Scripts
+# fi
+
 #ensure our ssh-agent is running and that our keys are added
 if [[ $os == "Linux" ]]; then
    eval `ssh-agent` > /dev/null

@@ -9,7 +9,7 @@ export LANG=en_US.UTF-8
 
 export PROMPT_COMMAND='echo -ne "\033]0;$(whoami)@$(hostname)|${PWD##*/}\007"'
 
-export EDITOR="nano"
+export EDITOR="emacs -nw --quick"
 
 #set some easily callable variables for colors
 Color_Off='\e[0m'       # Text Reset
@@ -183,66 +183,6 @@ GIT_PROMPT_THEME=Solarized_UserHost_Icaza
 source ~/.bash-git-prompt/gitprompt.sh
 
 
-###########################################
-
-# #git aware prompt
-# #assume we are on linux, unless we know we are on mac
-# if [[ $os == "Linux" ]]; then
-#     if [ -e /usr/share/bash-completion/completions/git ]; then
-#         git_completion="/usr/share/bash-completion/completions/git"
-#     elif [ -e /etc/bash_completion.d/git ]; then
-#         git_completion="/etc/bash_completion.d/git"
-#     fi
-# # elif [[ $os == "Darwin" ]]; then
-# #     git_completion="/usr/local/etc/bash_completion.d/git-completion.bash"
-# #     . $git_completion
-# elif [[ $os == "Darwin" ]]; then
-#      [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-#      source /usr/local/etc/bash_completion.d/git-completion.bash
-
-#      export PS1='[\u@mbp \w$(__git_ps1)]\$ '
-
-#      if [ -f "/usr/local/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-#          __GIT_PROMPT_DIR="/usr/local/opt/bash-git-prompt/share"
-#          source "/usr/local/opt/bash-git-prompt/share/gitprompt.sh"
-# fi
-
-# else
-#     unset git_completion
-# fi
-
-# if [[ "$git_completion" ]]; then
-#     if [ -f $git_completion ]; then
-#         export GIT_PS1_SHOWDIRTYSTATE=true
-#         export GIT_PS1_SHOWUNTRACKEDFILES=true
-#         export GIT_PS1_SHOWSTASHSTATE=true
-#         if [[ "$color_prompt" ]]; then
-#             PS1="$PS1\$(__git_ps1 ' [\[\e[34;1m\]%s\[\e[0m\]]')"
-#         else
-#             PS1="$PS1\$(__git_ps1 ' [%s]')"
-#         fi
-#     fi
-# fi
-
-# #svn aware prompt
-# if [ -f ~/.bash/subversion-prompt ]
-# then
-#     SVNP_HUGE_REPO_EXCLUDE_PATH="nufw-svn$|/tags$|/branches"
-#     . ~/.bash/subversion-prompt
-#     if [[ "$color_prompt" ]]; then
-#         PS1="$PS1\[\e[34;1m\]\$(__svn_stat)\[\e[0m\]"
-#     else
-#         PS1="$PS1\$(__svn_stat)"
-#     fi
-# fi
-
-# uid=`id -u`
-# if [ "$uid" == 0 ]; then
-#     PS1="$PS1 # "
-# else
-#     PS1="$PS1 \$ "
-# fi
-
 #######################################################
 ### end ###############################################
 ### modifications to PS1 prompt. order is important ###
@@ -255,11 +195,6 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# #enable colors for git
-# if [ -f /usr/bin/git ]; then
-#     git config --global color.diff True
-#     git config --global color.branch True
-# fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -274,37 +209,15 @@ if [ -f ~/.bash_aliases.$whoami ]; then
 fi
 
 
-#feels like root, even when you aren't
-#export PATH=$PATH:/usr/local/sbin:/sbin/:/usr/sbin
-# OS X related stuff
-if [[ $os == "Darwin" ]]; then
-   export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-   . /Applications/root*/bin/thisroot.sh
-   # added by Anaconda3 installer
-   export PATH="/Users/icaza/anaconda3/bin:$PATH"
-fi
-
-#include bin directory in users homedir
-if [ -d ~/bin ]; then
-    export PATH=$PATH:~/bin
-fi
-if [ -d ~/Scripts ]; then
-    export PATH=$PATH:~/Scripts
-fi
-
-
-#work-around for libnss3/sipe (http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=649456)
-#export NSS_SSL_CBC_RANDOM_IV=0
-
 #################################################################
 ### start #######################################################
 ### tab completion extentions. tab completion makes life good ###
 #################################################################
 
-#tab completion for ssh hosts
-if [ -f ~/.ssh/known_hosts ]; then
-    complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
-fi
+# #tab completion for ssh hosts
+# if [ -f ~/.ssh/known_hosts ]; then
+#     complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
+# fi
 
 # enable programmable completion features (you don't need to enable
 # this if it's already enabled in /etc/bash.bashrc and /etc/profile

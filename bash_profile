@@ -5,7 +5,6 @@ if [ -f ~/.profile ]; then
     source ~/.profile
 fi
 
-
 # if [[ $os == "Linux" ]]; then
 #    # test -d ~/.linuxbrew && PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"                                      
 #    # test -d /home/linuxbrew/.linuxbrew && PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH" 
