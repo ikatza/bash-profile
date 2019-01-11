@@ -6,4 +6,5 @@ escape ^|^|
 # escape ^`^`
 # escape ^jj
 termcapinfo xterm* ti@:te@
-logfile ./screenlogs/screen.%Y%m%d.log
+deflog on
+logfile ~/screenlogs/screen.%Y%m%d.log
