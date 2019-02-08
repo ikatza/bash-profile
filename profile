@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+
 #allow users to specify their own ~/.profile
 if [ -f ~/.profile.`whoami` ]; then
     source ~/.profile.`whoami`

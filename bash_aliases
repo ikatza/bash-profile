@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+
 alias cp='cp -iv'                           # careful and verbose
 alias mv='mv -iv'                           # careful and verbose
 alias mkdir='mkdir -pv'                     # create subdirs in necessary, verbose

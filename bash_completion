@@ -1,2 +1,4 @@
+# -*- mode: sh -*-
+
 # Autocomplete for git alias 'g' as well
 complete -o default -o nospace -F _git g
