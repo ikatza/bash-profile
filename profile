@@ -7,7 +7,7 @@ fi
 
 #include bin directory in users homedir
 if [ -d ~/bin ]; then
-    export PATH=$PATH:~/bin
+    export PATH=~/bin:$PATH
 fi
 # if [ -d ~/Scripts ]; then
 #     export PATH=$PATH:~/Scripts
