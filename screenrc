@@ -8,5 +8,7 @@ escape ^|^|
 # escape ^`^`
 # escape ^jj
 termcapinfo xterm* ti@:te@
+
+#log automatically
 deflog on
-logfile ~/screenlogs/screen.%Y%m%d.log
+logfile $HOME/screenlogs/screen.%Y%m%d.log

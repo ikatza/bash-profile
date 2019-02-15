@@ -5,10 +5,10 @@
 files="bash bash-git-prompt bash_profile bash_login bash_aliases bashrc profile profile.`whoami` bash_completion bash_logout screenrc"
 date=`date +"%Y%m%d"`
 
-mkdir -p -v  ~/screenlogs
-if [ -d ~/screenlogs ]; then
-    echo "Creating ~/screenlogs dir "
-    mkdir -p ~/screenlogs
+mkdir -p -v  $HOME/screenlogs
+if [ -d $HOME/screenlogs ]; then
+    echo "Creating $HOME/screenlogs dir "
+    mkdir -p $HOME/screenlogs
 fi
 
 for file in $files; do
