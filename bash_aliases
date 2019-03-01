@@ -29,6 +29,12 @@ alias fix_stty='stty sane'                  # fix_stty: Restore terminal setting
 alias cic='set completion-ignore-case On'   # cic: Make tab-completion case-insensitive
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd: Makes new Dir and jumps inside
 screenlog() { mkdir -p screenlogs && screen -U -L; }
+alias sn='screen -S'                        # sn for screen new
+alias sl='screen -ls'                       # sl for screen list
+alias sr='screen -x'                        # sr for screen resume
+function sk() {                             # sk for screen kill
+    screen -S "$1" -X quit
+}
 
 #   lr:  Full Recursive Directory Listing
 #   ------------------------------------------
