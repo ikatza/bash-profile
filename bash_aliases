@@ -8,6 +8,7 @@ alias folders='ll | grep ^d'
 alias reload='source ~/.bash_profile'
 # alias less='less -FSRXc'                    # Preferred 'less' implementation
 alias les='less'                            # Sloppy typing
+alias lessh='LESSOPEN="| src-hilite-lesspipe.sh %s" less -R '
 alias grep='grep --color=auto'              # colorful grep
 # cd() { builtin cd "$@"; ll; }             # Always list directory contents upon 'cd'
 alias ~="cd ~"                              # Go Home
