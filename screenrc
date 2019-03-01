@@ -1,11 +1,23 @@
 # -*- mode: sh -*-
 
+# Automatically detach on hangup.
+autodetach on
+
 # no welcome message
 startup_message off
+
+# larger command history
+defscrollback 10000
+
+# set the encoding of the windows to utf-8
+defutf8 on
 
 
 # map screen to ^\ (ctl+\)
 escape ^|^|
+
+#clear screen after pager
+altscreen on
 
 # Enable mouse scrolling and scroll bar history scrolling
 termcapinfo xterm* ti@:te@
