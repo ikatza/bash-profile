@@ -3,10 +3,11 @@
 # no welcome message
 startup_message off
 
-# map screen to ^\
+
+# map screen to ^\ (ctl+\)
 escape ^|^|
-# escape ^`^`
-# escape ^jj
+
+# Enable mouse scrolling and scroll bar history scrolling
 termcapinfo xterm* ti@:te@
 
 #log automatically
