@@ -3,7 +3,7 @@
 alias cp='cp -iv'                           # careful and verbose
 alias mv='mv -iv'                           # careful and verbose
 alias mkdir='mkdir -pv'                     # create subdirs in necessary, verbose
-alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
+alias ll='ls -tFGlAhp'                      # Preferred 'ls' implementation
 alias folders='ll | grep ^d'
 alias reload='source ~/.bash_profile'
 # alias less='less -FSRXc'                    # Preferred 'less' implementation
@@ -22,7 +22,7 @@ alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 # alias edit='subl'                         # edit: Opens any file in sublime editor
 # alias c='clear'                           # c: Clear terminal display
-alias whichs='type -all'                     # which: Find executables
+alias whichs='type -all'                    # which: Find executables
 alias path='echo -e ${PATH//:/\\n}'         # path: Echo all executable Paths
 alias show_options='shopt'                  # Show_options: display bash options settings
 alias fix_stty='stty sane'                  # fix_stty: Restore terminal settings when screwed up
@@ -44,12 +44,14 @@ alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\
 #           displays paginated result with colored search terms and two lines surrounding each hit.             Example: mans mplayer codec
 #   --------------------------------------------------------------------
 mans () {
-        man $1 | grep -iC2 --color=always $2 | less
+    man $1 | grep -iC3 --color=always $2  | less -R
 }
 
 #   showa: to remind yourself of an alias (given some part of it)
 #   ------------------------------------------------------------
-showa () { /usr/bin/grep --color=always -i -a1 $@ ~/.bash_aliases | grep -v '^\s*$' ; }
+showa () {
+    grep --color=always -i -a1 $@ ~/.bash_aliases ~/.gitconfig | grep -v '^\s*$' ;
+}
 
 
 # OSX specific
