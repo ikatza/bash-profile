@@ -24,6 +24,7 @@ alias .6='cd ../../../../../../'            # Go back 6 directory levels
 # alias c='clear'                           # c: Clear terminal display
 alias df='df -hat'
 alias ps='ps aux'
+alias psg='ps | grep -v grep | grep -i  -e '
 alias wget="wget -c"                        # continue downloading in case of problems
 alias whichs='type -all'                    # which: Find executables
 alias path='echo -e ${PATH//:/\\n}'         # path: Echo all executable Paths
@@ -56,6 +57,11 @@ showa () {
     grep --color=always -i -a1 $@ ~/.bash_aliases ~/.gitconfig | grep -v '^\s*$' ;
 }
 
+#  grep-rs: recursive string grep
+# usage: grep-rs path-to-start "string"
+grep-rs  () {
+    grep -rnwi2 "$1" -e "$2" ;
+}
 
 # OSX specific
 if [[ $os == "Darwin" ]]; then
@@ -74,6 +80,7 @@ alias emacst='emacs -nw'
 alias emacstt='emacs -nw --quick'
 # alias emacs_custom emacs -q -l ~/my-init-file.el # support to load a specific init file
 alias h='history'
+alias hg=' history | grep -i '
 alias roo='root -l'
 alias rooty='root -n -b -q'
 alias clipy='xclip -sel clip'
