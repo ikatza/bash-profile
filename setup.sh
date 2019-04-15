@@ -2,7 +2,7 @@
 
 #this script will setup bash specifics using the configs in this repo
 
-files="bash bash-git-prompt bash_profile bash_login bash_aliases bashrc profile profile.`whoami` bash_completion bash_logout screenrc"
+files="bash bash-git-prompt bash_profile bash_login bash_aliases bashrc profile profile.`whoami` bash_completion bash_logout screenrc tmux.conf tmux.conf.local"
 date=`date +"%Y%m%d"`
 
 mkdir -p -v  $HOME/screenlogs
