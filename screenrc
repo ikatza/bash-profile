@@ -14,8 +14,6 @@ defutf8 on
 
 # Pretty status bar at the bottom.
 caption always "%{= kw}%-w%{= bw}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
-hardstatus on
-hardstatus alwayslastline
 
 # map screen to ^\ (ctl+\)
 escape ^|^|
