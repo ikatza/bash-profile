@@ -14,7 +14,9 @@ export PROMPT_COMMAND='echo -ne "\033]0;$(whoami)@$(hostname)|${PWD##*/}\007"'
 export EDITOR="emacs -nw --quick"
 
 export bpd="$HOME/Githubbies/bash-profile"
+export BPD=$bpd
 export gpd="$HOME/Githubbies/gitconfigs"
+export GPD=$gpd
 
 #set some easily callable variables for colors
 Color_Off='\e[0m'       # Text Reset
