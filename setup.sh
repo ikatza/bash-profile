@@ -25,7 +25,7 @@ for file in $files; do
 done
 
 
-if [ -d ~/bin ]
-	then cp bin/* ~/bin
+if [ -d ~/bin ]; then
+    cp bin/* ~/bin
 else cp -r bin ~/bin
 fi

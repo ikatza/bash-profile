@@ -84,29 +84,6 @@ On_IPurple='\e[10;95m'  # Purple
 On_ICyan='\e[0;106m'    # Cyan
 On_IWhite='\e[0;107m'   # White
 
-#########################################
-### start ###############################
-### modifications to history settings ###
-#########################################
-
-# # don't put duplicate lines in the history. See bash(1) for more options
-# # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-# HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
-# # ... or force ignoredups and ignorespace
-# HISTCONTROL=ignoreboth
-
-# HISTIGNORE="reboot:shutdown *:ls:pwd:exit:mount:man *:history"
-
-# # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-# export HISTSIZE=10000
-# export HISTFILESIZE=10000
-
-# # Add timestamp to history file.
-# export HISTTIMEFORMAT="%F %T "
-
-# #append to history, don't overwrite
-# shopt -s histappend
-# PROMPT_COMMAND='history -a'
 
 # Eternal bash history.
 # ---------------------
@@ -122,12 +99,6 @@ export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-
-
-#########################################
-### end #################################
-### modifications to history settings ###
-#########################################
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -248,37 +219,7 @@ fi
 ### ssh related stuff, like ssh-agent ###
 #########################################
 
-# ## FIXME ## doesn't test ssh-add for success, should add that
-
-# tmpdir="/tmp/`whoami`"
-# start_agent() {
-#         mkdir -m700 $tmpdir
-#         ssh-agent | grep -v echo > $tmpdir/agent.sh
-#         chmod 600 $tmpdir/agent.sh
-#         source $tmpdir/agent.sh
-#         ssh-add
-#         }
-
-# cleanup() {
-#         # something wrong, flatten all
-#         rm -rf $tmpdir
-#         killall ssh-agent
-#         }
-
-# test=`ps -ef | grep [s]sh-agent | awk '{print $2}'`
-# if [ "$test" != "" ]; then
-#    # there is  an agent running, check for agent.sh file
-#    if [ -e "$tmpdir/agent.sh" ]; then
-#       source $tmpdir/agent.sh
-#    else
-#       # No agent.sh file, orphaned ssh-agent, kill it and restart it.
-#       cleanup
-#       start_agent
-#    fi;
-# else
-#    # No ssh-agent running, starting a  new one
-#    start_agent
-# fi;
+# ssh agent not working
 
 #########################################
 ### end #################################
@@ -287,7 +228,7 @@ fi
 
 # run logout script, even for non-login shells
 trap_exit() {
-	. "$HOME/.bash_logout"
+    . "$HOME/.bash_logout"
 }
 trap trap_exit EXIT
 
