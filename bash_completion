@@ -2,3 +2,6 @@
 
 # Autocomplete for git alias 'g' as well
 complete -o default -o nospace -F _git g
+
+# Needed to have proper shell variables expansion in BASH_VERSION>4.2+
+shopt -s direxpand

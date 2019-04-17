@@ -226,9 +226,20 @@ fi
 ### tab completion extentions. tab completion makes life good ###
 #################################################################
 
-brewPrefix=`brew --prefix`
-export BASH_COMPLETION_COMPAT_DIR="$brewPrefix/etc/bash_completion.d"
-[[ -r "$brewPrefix/etc/profile.d/bash_completion.sh" ]] && . "$brewPrefix/etc/profile.d/bash_completion.sh"
+if type brew &>/dev/null; then
+  brewPrefix=`brew --prefix`
+  export BASH_COMPLETION_COMPAT_DIR="$brewPrefix/etc/bash_completion.d"
+  [[ -r "$brewPrefix/etc/profile.d/bash_completion.sh" ]] && . "$brewPrefix/etc/profile.d/bash_completion.sh"
+
+  for COMPLETION in $(brew --prefix)/etc/bash_completion.d/*
+  do
+    [[ -f $COMPLETION ]] && source "$COMPLETION" &>/dev/null
+  done
+  if [[ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]];
+  then
+    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+  fi
+fi
 
 #########################################
 ### start ###############################
