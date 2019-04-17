@@ -133,7 +133,7 @@ shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
+export LESSOPEN="|lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
