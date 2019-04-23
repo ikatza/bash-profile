@@ -4,4 +4,8 @@
 complete -o default -o nospace -F _git g
 
 # Needed to have proper shell variables expansion in BASH_VERSION>4.2+
-shopt -s direxpand
+function version_gt() { test "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1"; }
+bash_version_at_least=4.2.1
+if version_gt $BASH_VERSION $bash_version_at_least; then
+    shopt -s direxpand
+fi;
