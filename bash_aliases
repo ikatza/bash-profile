@@ -33,12 +33,16 @@ alias fix_stty='stty sane'                  # fix_stty: Restore terminal setting
 alias cic='set completion-ignore-case On'   # cic: Make tab-completion case-insensitive
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd: Makes new Dir and jumps inside
 screenlog() { mkdir -p screenlogs && screen -U -L; }
-alias sn='screen -S'                        # sn for screen new
-alias sl='screen -ls'                       # sl for screen list
-alias sr='screen -x'                        # sr for screen resume
-function sk() {                             # sk for screen kill
+alias sn='screen -S'                        # new screen with name
+alias sl='screen -ls'                       # list running screen sessions
+alias sr='screen -x'                        # reattach screen
+function sk() {                             # kill screen session
     screen -S "$1" -X quit
 }
+alias tmn='tmux new-session -s'             # new tmux session with name
+alias tml='tmux list-sessions'              # list running tmux sessions
+alias tmr='tmux attach-session'             # reattach tmux
+alias tmk='tmux kill-session'               # kill tmux session
 
 #   lr:  Full Recursive Directory Listing
 #   ------------------------------------------
