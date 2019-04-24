@@ -1,0 +1,60 @@
+# -*- mode: sh -*-
+
+if [[ "$HOSTNAME" =~ "dune" ]]
+then
+  echo "I'm on a dune server"
+  # ulimit -c unlimited
+  # source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
+
+  WORK_DIR=/dune/app/users/$USER
+  DATA_DIR=/dune/data/users/$USER
+fi
+
+
+if [[ "$HOSTNAME" =~ "sbnd" ]]
+then
+  echo "I'm on a sbnd server"
+  # ulimit -c unlimited
+  # source /cvmfs/sbnd.opensciencegrid.org/products/sbnd/setup_sbnd.sh
+
+  export WORK_DIR=/sbnd/app/users/$USER
+  export DATA_DIR=/sbnd/data/users/$USER
+fi
+export PATH=$HOME/local/bin:$PATH
+
+# eval $(/nashome/i/icaza/.linuxbrew/bin/brew shellenv)
+#export PATH="$HOME/.linuxbrew/bin:$PATH"
+#export PATH="$HOME/.linuxbrew/sbin:$PATH"
+#export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+#export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+#export PATH=$HOME/Githubbies/git-cola/bin:$PATH
+
+#VNC stuff
+VNCNUM=17 #CHANGE THIS NUMBER TO WHATEVER VNC SERVER NUMBER YOU PICKED
+if [[ `hostname` == *"sbndgpvm"* ]] #only start VNC servers on the gpvms (i.e. not on the build machines)
+then
+  export DISPLAY=localhost:$VNCNUM #Export the display to point to the VNC server
+  vncserver :$VNCNUM -localhost    #Check if the VNC server is running and start it if not (-localhost mandatory!)
+fi
+
+# utility to setup the current version of products
+# to run do:
+#  setup `latest product`
+function latest {
+    product=$1
+    quals=$2
+    version=v`ups list -aK"VERSION" $product $quals | uniq | sed -e 's/v//' -e 's/\"//g' | sort -n | tail -1`
+    if [ "X$quals" == "X" ]; then
+	quals=`ups list -aK"QUALIFIERS" $product $version | grep "prof" | grep -v "noifdh" | sed -e 's/\"//g' | uniq | sort -n | tail -1`
+	if [ "X$quals" != "X" ]; then
+	    quals="-q$quals"
+	fi
+    fi
+
+    echo "$product $version $quals"
+}
+
+# for faster builds, do:
+# do your building on dunebuild01
+# setup `latest ninja`
+# mrb i --generator=ninja
