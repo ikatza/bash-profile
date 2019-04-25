@@ -41,7 +41,7 @@ function sk() {                             # kill screen session
 }
 alias tmn='tmux new-session -s'             # new tmux session with name
 alias tml='tmux list-sessions'              # list running tmux sessions
-alias tmr='tmux attach-session'             # reattach tmux
+alias tmr='tmux attach-session -t'          # reattach tmux
 alias tmk='tmux kill-session'               # kill tmux session
 
 #   lr:  Full Recursive Directory Listing
@@ -79,7 +79,7 @@ fi
 
 # alias py='python'
 alias py='python3'
-alias emacsclient=ec
+alias ec='emacsclient'
 alias emacst='emacs -nw'
 alias emacstt='emacs -nw --quick'
 # alias emacs_custom emacs -q -l ~/my-init-file.el # support to load a specific init file
