@@ -1,5 +1,10 @@
 # -*- mode: sh -*-
 
+# don't load anything if you're connecting with tramp
+if [[ $TERM = dumb ]]; then
+    return
+fi
+
 #allow users to specify their own ~/.profile
 if [ -f ~/.profile.`whoami` ]; then
     source ~/.profile.`whoami`
