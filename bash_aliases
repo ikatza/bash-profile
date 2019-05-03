@@ -39,9 +39,11 @@ alias sr='screen -x'                        # reattach screen
 function sk() {                             # kill screen session
     screen -S "$1" -X quit
 }
-alias tmn='tmux new-session -s'             # new tmux session with name
+alias tmn='tmux new-session -A -s'          # new tmux session with name, or attach to existing session
 alias tml='tmux list-sessions'              # list running tmux sessions
-alias tmr='tmux attach-session -t'          # reattach tmux
+function tmr() {                            # reattach tmux to session or the default if no session is given
+    tmux attach-session -t $1 &>/dev/null || tmux attach
+}
 alias tmk='tmux kill-session'               # kill tmux session
 
 #   lr:  Full Recursive Directory Listing
