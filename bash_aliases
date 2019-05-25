@@ -100,9 +100,13 @@ alias ssh-tunnel='ssh -N -L localhost:9999:localhost:9998 ' # maybe add -f to ha
 alias jupyter-tunnel='jupyter notebook --no-browser --port=9998'
 
 if [[ $os == "Darwin" ]]; then
-   alias dush='du -sh * | gsort -h'
+    dush () {
+        du -sh $1 | gsort -rh
+    }
 elif [[ $os == "Linux" ]]; then
-     alias dush='du -sh * | sort -h'
+    dush () {
+        du -sh $1 | sort -rh
+    }
 fi
 
 alias g='git'
