@@ -44,7 +44,11 @@ alias tml='tmux list-sessions'              # list running tmux sessions
 function tmr() {                            # reattach tmux to session or the default if no session is given
     tmux attach-session -t $1 &>/dev/null || tmux attach
 }
-alias tmk='tmux kill-session'               # kill tmux session
+alias tmk='tmux kill-session -t'               # kill tmux session
+
+fixtm() {                                   # used to re evaluate tmux variables
+    eval $(tmux show-env -s | grep -e '^SSH_' -e '^KRB5' -e DISPLAY)
+}
 
 #   lr:  Full Recursive Directory Listing
 #   ------------------------------------------
