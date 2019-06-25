@@ -109,10 +109,9 @@ elif [[ $os == "Linux" ]]; then
     }
 fi
 
-alias g='git'
 
-# Autocomplete for 'g' as well
-complete -o default -o nospace -F _git g
+alias g='git'   # lazy typing
+alias gi='git'  # lazy and typo typing
 
 
 #check alias when querying 'which'
