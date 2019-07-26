@@ -8,11 +8,11 @@ then
 fi
 
 # eval $(/home/nfs/icaza/.linuxbrew/bin/brew shellenv)
-export PATH=/home/nfs/icaza/.linuxbrew/bin:$PATH
-export PATH=/home/nfs/icaza/.linuxbrew/sbin:$PATH
-export PATH=/home/nfs/icaza/Githubbies/git-cola/bin:$PATH
+export PATH=$HOME/.linuxbrew/bin:$PATH
+export PATH=$HOME/.linuxbrew/sbin:$PATH
+export PATH=$HOME/Githubbies/git-cola/bin:$PATH
 
-exec /home/nfs/icaza/.linuxbrew/bin/bash
+exec $HOME/.linuxbrew/bin/bash
 
 # #VNC stuff
 # VNCNUM=11 #CHANGE THIS NUMBER TO WHATEVER VNC SERVER NUMBER YOU PICKED
