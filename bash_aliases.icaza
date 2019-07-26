@@ -1,0 +1,30 @@
+# -*- mode: sh -*- 
+
+#Start a VNC server
+function vnc_start() {
+    VNCNUM=17 #CHANGE THIS NUMBER TO WHATEVER VNC SERVER NUMBER YOU PICKED
+    if [[ `hostname` == *"sbndgpvm"* ]] #only start VNC servers on the gpvms (i.e. not on the build machines)
+    then
+	echo "Starting VNC on port $VNCNUM"
+	export DISPLAY=localhost:$VNCNUM #Export the display to point to the VNC server
+	vncserver :$VNCNUM -localhost    #Check if the VNC server is running and start it if not (-localhost mandatory!)
+    fi
+}
+
+
+# utility to setup the current version of products
+# to run do:
+#  setup `latest product`
+function latest() {
+    product=$1
+    quals=$2
+    version=v`ups list -aK"VERSION" $product $quals | uniq | sed -e 's/v//' -e 's/\"//g' | sort -n | tail -1`
+    if [ "X$quals" == "X" ]; then
+	quals=`ups list -aK"QUALIFIERS" $product $version | grep "prof" | grep -v "noifdh" | sed -e 's/\"//g' | uniq | sort -n | tail -1`
+	if [ "X$quals" != "X" ]; then
+	    quals="-q$quals"
+	fi
+    fi
+
+    echo "$product $version $quals"
+}
