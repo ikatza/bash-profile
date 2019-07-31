@@ -190,8 +190,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 #load user specific aliases
-if [ -f ~/.bash_aliases.$whoami ]; then
-    . ~/.bash_aliases.$whoami
+if [ -f ~/.bash_aliases.`whoami` ]; then
+    . ~/.bash_aliases.`whoami`
 fi
 
 
