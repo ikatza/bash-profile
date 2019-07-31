@@ -28,3 +28,9 @@ function latest() {
 
     echo "$product $version $quals"
 }
+
+function sors() {
+    source /cvmfs/sbnd.opensciencegrid.org/products/sbnd/setup_sbnd.sh
+}
+
+alias ninja_='ninja -C ${MRB_BUILDDIR} -k 0 install'
