@@ -7,7 +7,7 @@ fi
 
 #allow users to specify their own ~/.profile
 if [ -f ~/.profile.`whoami` ]; then
-    source ~/.profile.`whoami`
+    source ~/.profile.$HOSTNAME.`whoami`
 fi
 
 #include bin directory in users homedir
