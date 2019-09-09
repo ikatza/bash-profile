@@ -12,20 +12,20 @@ if [ -d $HOME/screenlogs ]; then
 fi
 
 for file in $files; do
-    if [ -h ~/.$file ]; then
-        unlink ~/.$file
+    if [ -h $HOME/.$file ]; then
+        unlink $HOME/.$file
     else
-        if [ -f ~/.$file ]; then
-            echo "backing up ~/.$file to ~/.$file.bak$date"
-            mv ~/.$file ~/.$file.bak$date
+        if [ -f $HOME/.$file ]; then
+            echo "backing up $HOME/.$file to $HOME/.$file.bak$date"
+            mv $HOME/.$file $HOME/.$file.bak$date
         fi
     fi
-    echo "symlinking $PWD/$file to ~/.$file"
-    ln -s $PWD/$file ~/.$file
+    echo "symlinking $PWD/$file to $HOME/.$file"
+    ln -s $PWD/$file $HOME/.$file
 done
 
 
-if [ -d ~/bin ]; then
-    cp bin/* ~/bin
-else cp -r bin ~/bin
+if [ -d $HOME/bin ]; then
+    cp bin/* $HOME/bin
+else cp -r bin $HOME/bin
 fi

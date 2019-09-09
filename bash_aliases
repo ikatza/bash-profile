@@ -12,7 +12,7 @@ alias lessh='LESSOPEN="| src-hilite-lesspipe.sh %s" less -R '
 alias grep='grep --color=auto'              # colorful grep
 # cd() { builtin cd "$@"; ll; }             # Always list directory contents upon 'cd'
 alias ~="cd ~"                              # Go Home
-alias g.d="cd ~/Githubbies/"
+alias g.d="cd $HOME/Githubbies/"
 alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
 alias ..='cd ../'                           # Go back 1 directory level
 alias ...='cd ../../'                       # Go back 2 directory levels
@@ -64,7 +64,7 @@ mans () {
 #   showa: to remind yourself of an alias (given some part of it)
 #   ------------------------------------------------------------
 showa () {
-    grep --color=always -i -a1 $@ ~/.bash_aliases ~/.gitconfig | grep -v '^\s*$' ;
+    grep --color=always -i -a1 $@ $HOME/.bash_aliases $HOME/.gitconfig | grep -v '^\s*$' ;
 }
 
 #  grep-rs: recursive string grep
@@ -77,10 +77,11 @@ grep-rs  () {
 if [[ $os == "Darwin" ]]; then
    alias f='open -a Finder ./'                 # f: Opens current directory in MacOS Finder
    alias locate='mdfind -name'
-   trash () { command mv "$@" ~/.Trash ; }     # trash: Moves a file to the MacOS trash
+   trash () { command mv "$@" $HOME/.Trash ; }     # trash: Moves a file to the MacOS trash
    ql () { qlmanage -p "$*" >& /dev/null; }    # ql: Opens any file in MacOS Quicklook Preview
-   alias DT='tee ~/Desktop/terminalOut.txt'    # DT: Pipe content to file on MacOS Desktop
+   alias DT='tee $HOME/Desktop/terminalOut.txt'    # DT: Pipe content to file on MacOS Desktop
    alias lldb='PATH="/usr/bin:$PATH" lldb'
+   alias free='$HOME/bin/meminfo.py'
 fi
 
 # alias py='python'
@@ -88,7 +89,7 @@ alias py='python3'
 alias ec='emacsclient'
 alias emacst='emacs -nw'
 alias emacstt='emacs -nw --quick'
-# alias emacs_custom emacs -q -l ~/my-init-file.el # support to load a specific init file
+# alias emacs_custom emacs -q -l $HOME/my-init-file.el # support to load a specific init file
 alias h='history'
 alias hg=' history | grep -i '
 alias roo='root -l'
@@ -118,4 +119,4 @@ alias gi='git'  # lazy and typo typing
 # Doesn't work on Debian derived distros. Removing for now.
 #alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 
-# alias ssh="~/.bash/try-mosh.sh $*"
+# alias ssh="$HOME/.bash/try-mosh.sh $*"
