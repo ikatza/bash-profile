@@ -2,7 +2,7 @@
 
 #this script will setup bash specifics using the configs in this repo
 
-files="bash bash-git-prompt bash_profile bash_login bash_aliases bash_aliases.`whoami` bashrc profile profile.`whoami` bash_completion bash_logout screenrc"
+files="bash bash-git-prompt bash_profile bash_login bash_aliases bash_aliases.$HOSTNAME.`whoami` bashrc profile profile.$HOSTNAME.`whoami` bash_completion bash_logout screenrc"
 date=`date +"%Y%m%d"`
 
 mkdir -p -v  $HOME/screenlogs
