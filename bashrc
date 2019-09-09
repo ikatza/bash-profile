@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 
-# ~/.bashrc: executed by bash(1) for non-login shells.
+# $HOME/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -95,7 +95,7 @@ export HISTTIMEFORMAT="[%F %T] "
 HISTCONTROL=erasedups
 # Change the file location because certain bash sessions truncate .bash_history file upon close.
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
-export HISTFILE=~/.bash_eternal_history
+export HISTFILE=$HOME/.bash_eternal_history
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
@@ -163,10 +163,10 @@ GIT_PROMPT_THEME=Solarized_UserHost_Icaza
 # GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
 
 # as last entry source the gitprompt script
-# GIT_PROMPT_THEME=Custom # use custom theme specified in file GIT_PROMPT_THEME_FILE (default ~/.git-prompt-colors.sh)
-# GIT_PROMPT_THEME_FILE=~/.git-prompt-colors.sh
+# GIT_PROMPT_THEME=Custom # use custom theme specified in file GIT_PROMPT_THEME_FILE (default $HOME/.git-prompt-colors.sh)
+# GIT_PROMPT_THEME_FILE=$HOME/.git-prompt-colors.sh
 # GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
-source ~/.bash-git-prompt/gitprompt.sh
+source $HOME/.bash-git-prompt/gitprompt.sh
 
 
 #######################################################
@@ -178,39 +178,40 @@ source ~/.bash-git-prompt/gitprompt.sh
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    test -r $HOME/.dircolors && eval "$(dircolors -b $HOME/.dircolors)" || eval "$(dircolors -b)"
 fi
 
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
+# $HOME/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f $HOME/.bash_aliases ]; then
+    . $HOME/.bash_aliases
 fi
 #load user specific aliases
-if [ -f ~/.bash_aliases.`whoami` ]; then
-    . ~/.bash_aliases.`whoami`
+if [ -f $HOME/.bash_aliases.$HOSTNAME.`whoami` ]; then
+    . $HOME/.bash_aliases.$HOSTNAME.`whoami`
 fi
 
 
 #################################################################
 ### tab completion extentions. tab completion makes life good ###
 #################################################################
+if [ $BREW_WORKING -eq 0 ] ; then
+  if type brew &>/dev/null; then
+    brewPrefix=`brew --prefix`
+    export BASH_COMPLETION_COMPAT_DIR="$brewPrefix/etc/bash_completion.d"
+    [[ -r "$brewPrefix/etc/profile.d/bash_completion.sh" ]] && . "$brewPrefix/etc/profile.d/bash_completion.sh"
 
-if type brew &>/dev/null; then
-  brewPrefix=`brew --prefix`
-  export BASH_COMPLETION_COMPAT_DIR="$brewPrefix/etc/bash_completion.d"
-  [[ -r "$brewPrefix/etc/profile.d/bash_completion.sh" ]] && . "$brewPrefix/etc/profile.d/bash_completion.sh"
-
-  for COMPLETION in $(brew --prefix)/etc/bash_completion.d/*
-  do
-    [[ -f $COMPLETION ]] && source "$COMPLETION" &>/dev/null
-  done
-  if [[ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]];
-  then
-    source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+    for COMPLETION in $(brew --prefix)/etc/bash_completion.d/*
+    do
+      [[ -f $COMPLETION ]] && source "$COMPLETION" &>/dev/null
+    done
+    if [[ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]];
+    then
+      source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+    fi
   fi
 fi
 
@@ -233,4 +234,4 @@ trap_exit() {
 trap trap_exit EXIT
 
 #after loading everything that is generic to our environment, load user specifc stuff
-[ -f ~/.bashrc.$whoami ] && . ~/.bashrc.$whoami
+[ -f $HOME/.bashrc.$whoami ] && . $HOME/.bashrc.$whoami

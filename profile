@@ -5,18 +5,11 @@ if [[ $TERM = dumb ]]; then
     return
 fi
 
-#allow users to specify their own ~/.profile
-if [ -f ~/.profile.`whoami` ]; then
-    source ~/.profile.`whoami`
+#allow users to specify their own $HOME/.profile
+if [ -f $HOME/.profile.$HOSTNAME.`whoami` ]; then
+    source $HOME/.profile.$HOSTNAME.`whoami`
 fi
 
-#include bin directory in users homedir
-if [ -d ~/bin ]; then
-    export PATH=~/bin:$PATH
-fi
-# if [ -d ~/Scripts ]; then
-#     export PATH=$PATH:~/Scripts
-# fi
 
 # #ensure our ssh-agent is running and that our keys are added
 # if [[ $os == "Linux" ]]; then
@@ -34,6 +27,7 @@ fi
 # fi
 
 #move on to .bashrc
-if [ -f ~/.bashrc ]; then
-    source ~/.bashrc
+if [ -f $HOME/.bashrc ]; then
+    ##### TODO add guards like this [ -z "$SOME_VAR_SET_IN_BASHRC" ] && . $HOME/.bashrc
+    source $HOME/.bashrc
 fi

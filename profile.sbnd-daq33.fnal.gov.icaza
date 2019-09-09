@@ -1,0 +1,34 @@
+# -*- mode: sh -*-
+
+if [[ "$HOSTNAME" =~ "sbnd" ]]
+then
+  echo "I'm on a sbnd server"
+  export WORK_DIR="$HOME/work"
+  # source /software/products/setup
+fi
+
+$HOME/.linuxbrew/opt/git/bin/git --version &> /dev/null || export BREW_WORKING=$?
+if [ $BREW_WORKING -eq 0 ] ; then
+    # eval $(/home/nfs/icaza/.linuxbrew/bin/brew shellenv)
+    export PATH=$HOME/.linuxbrew/bin:$PATH
+    export PATH=$HOME/.linuxbrew/sbin:$PATH
+    export PATH=$HOME/Githubbies/git-cola/bin:$PATH
+
+    if $HOME/.linuxbrew/bin/bash --version  &>/dev/null ; then
+	exec $HOME/.linuxbrew/bin/bash
+    else
+	echo "Can't use new bash in this server"
+    fi
+else
+    echo "No brew nor new bash in this server"
+fi
+
+# for faster builds, do:
+# do your building on dunebuild01
+# setup `latest ninja`
+# mrb i --generator=ninja
+# to recompile do:
+# cd $MRB_BUILDDIR
+# ninja install
+# or
+# ninja -C ${MRB_BUILDDIR} -k 0 install | grep -v | grep -v "Up-to-date" 

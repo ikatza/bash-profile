@@ -2,7 +2,7 @@
 
 #this script will setup bash specifics using the configs in this repo
 
-files="bash bash-git-prompt bash_profile bash_login bash_aliases bash_aliases.`whoami` bashrc profile profile.`whoami` bash_completion bash_logout screenrc"
+files="bash bash-git-prompt bash_profile bash_login bash_aliases bash_aliases.$HOSTNAME.`whoami` bashrc profile profile.$HOSTNAME.`whoami` bash_completion bash_logout screenrc"
 date=`date +"%Y%m%d"`
 
 mkdir -p -v  $HOME/screenlogs
@@ -12,20 +12,20 @@ if [ -d $HOME/screenlogs ]; then
 fi
 
 for file in $files; do
-    if [ -h ~/.$file ]; then
-        unlink ~/.$file
+    if [ -h $HOME/.$file ]; then
+        unlink $HOME/.$file
     else
-        if [ -f ~/.$file ]; then
-            echo "backing up ~/.$file to ~/.$file.bak$date"
-            mv ~/.$file ~/.$file.bak$date
+        if [ -f $HOME/.$file ]; then
+            echo "backing up $HOME/.$file to $HOME/.$file.bak$date"
+            mv $HOME/.$file $HOME/.$file.bak$date
         fi
     fi
-    echo "symlinking $PWD/$file to ~/.$file"
-    ln -s $PWD/$file ~/.$file
+    echo "symlinking $PWD/$file to $HOME/.$file"
+    ln -s $PWD/$file $HOME/.$file
 done
 
 
-if [ -d ~/bin ]; then
-    cp bin/* ~/bin
-else cp -r bin ~/bin
+if [ -d $HOME/bin ]; then
+    cp bin/* $HOME/bin
+else cp -r bin $HOME/bin
 fi
