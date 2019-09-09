@@ -191,7 +191,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 #load user specific aliases
 if [ -f ~/.bash_aliases.`whoami` ]; then
-    . ~/.bash_aliases.`whoami`
+    . ~/.bash_aliases.$HOSTNAME.`whoami`
 fi
 
 
