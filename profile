@@ -6,10 +6,9 @@ if [[ $TERM = dumb ]]; then
 fi
 
 #allow users to specify their own $HOME/.profile
-if [ -f $HOME/.profile.$HOSTNAME.`whoami` ]; then
-    source $HOME/.profile.$HOSTNAME.`whoami`
+if [ -f $HOME/.profile.$host.$who_am_i ]; then
+    source $HOME/.profile.$host.$who_am_i
 fi
-
 
 # #ensure our ssh-agent is running and that our keys are added
 # if [[ $os == "Linux" ]]; then
@@ -31,3 +30,4 @@ if [ -f $HOME/.bashrc ]; then
     ##### TODO add guards like this [ -z "$SOME_VAR_SET_IN_BASHRC" ] && . $HOME/.bashrc
     source $HOME/.bashrc
 fi
+

@@ -1,7 +1,12 @@
 # -*- mode: sh -*-
 
-os=`uname -s`
-whoami=`who | awk '{print $1}' | head -1`
+export os=$(uname -s)
+export who_am_i=$(whoami)
+if [[ $(uname -s) == "Linux" ]]; then
+    export host=$(hostname -d)
+else
+    export host=$(hostname -s)
+fi
 
 export BREW_WORKING=0
 

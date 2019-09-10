@@ -190,15 +190,14 @@ if [ -f $HOME/.bash_aliases ]; then
     . $HOME/.bash_aliases
 fi
 #load user specific aliases
-if [ -f $HOME/.bash_aliases.$HOSTNAME.`whoami` ]; then
-    . $HOME/.bash_aliases.$HOSTNAME.`whoami`
+if [ -f $HOME/.bash_aliases.$host.$who_am_i ]; then
+    . $HOME/.bash_aliases.$host.$who_am_i
 fi
-
 
 #################################################################
 ### tab completion extentions. tab completion makes life good ###
 #################################################################
-if [ $BREW_WORKING -eq 0 ] ; then
+if [[ $BREW_WORKING == 0 ]] ; then
   if type brew &>/dev/null; then
     brewPrefix=`brew --prefix`
     export BASH_COMPLETION_COMPAT_DIR="$brewPrefix/etc/bash_completion.d"
@@ -234,4 +233,4 @@ trap_exit() {
 trap trap_exit EXIT
 
 #after loading everything that is generic to our environment, load user specifc stuff
-[ -f $HOME/.bashrc.$whoami ] && . $HOME/.bashrc.$whoami
+[ -f $HOME/.bashrc.$who_am_i ] && . $HOME/.bashrc.$who_am_i
