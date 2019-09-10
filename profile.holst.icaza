@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+# . /Applications/root*/bin/thisroot.sh
+# . /usr/local/bin/thisroot.sh
+. $(brew --prefix)/Cellar/root/6.*/bin/thisroot.sh
+
+eval "$(thefuck --alias)"
+
+# added by Anaconda3 installer
+# export PATH="/Users/icaza/anaconda3/bin:$PATH"
+
+# if [[ -r "$(brew --prefix)/opt/mcfly/mcfly.bash" ]]; then
+#   source "$(brew --prefix)/opt/mcfly/mcfly.bash"
+# fi

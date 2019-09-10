@@ -1,5 +1,7 @@
 # -*- mode: sh -*-
 
+export PATH=$HOME/local/bin:$PATH
+
 if [[ "$HOSTNAME" =~ "daq" && "$HOSTNAME" =~ "sbn" ]]
 then
     echo "I'm on a sbnd daq server"
