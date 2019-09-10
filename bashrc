@@ -166,7 +166,7 @@ GIT_PROMPT_THEME=Solarized_UserHost_Icaza
 # GIT_PROMPT_THEME=Custom # use custom theme specified in file GIT_PROMPT_THEME_FILE (default $HOME/.git-prompt-colors.sh)
 # GIT_PROMPT_THEME_FILE=$HOME/.git-prompt-colors.sh
 # GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
-source $HOME/.bash-git-prompt/gitprompt.sh
+[ -f $HOME/.bash-git-prompt/gitprompt.sh ] && source $HOME/.bash-git-prompt/gitprompt.sh
 
 
 #######################################################
