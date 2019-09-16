@@ -28,9 +28,19 @@ function latest () {
 }
 
 function sors() {
-    source /daq/software/products/setup
-    setup mrb
-    setup `latest ninja`
+    if [[ "$HOSTNAME" =~ "daq" && "$HOSTNAME" =~ "sbn" ]]; then
+	source /daq/software/products/setup
+	setup mrb
+	setup `latest ninja`
+    fi
+    if [[ "$HOSTNAME" =~ "gpvm" ]]; then
+	if [[ "$HOSTNAME" =~ "dune" ]]; then
+	    source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
+	fi
+	if [[ "$HOSTNAME" =~ "sbnd" ]]; then
+	    source /cvmfs/sbnd.opensciencegrid.org/products/sbnd/setup_sbnd.sh
+	fi	
+    fi
 }
 
 alias ninja_='ninja -C ${MRB_BUILDDIR} -k 0 install'
