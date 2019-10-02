@@ -1,6 +1,7 @@
 # -*- mode: sh -*-
 
 export PATH=$HOME/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 if [[ "$HOSTNAME" =~ "daq" && "$HOSTNAME" =~ "sbn" ]]
 then
