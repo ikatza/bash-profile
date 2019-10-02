@@ -1,5 +1,17 @@
 # -*- mode: sh -*-
 
+# mirror directory
+if [[ "$HOSTNAME" =~ "gpvm" ]]; then
+    if [[ "$PWD" =~ "/app/users/$USER" ]]; then
+	export M=$(echo $PWD | sed -e "s|app/users|data/users|g")
+	export MI=$(echo ${PWD%/*} | sed -e "s|app/users|data/users|g")
+    fi
+    if [[ "$PWD" =~ "/data/users/$USER" ]]; then
+	export M=$(echo $PWD | sed -e "s|data/users|app/users|g")
+	export MI=$(echo ${PWD%/*} | sed -e "s|data/users|app/users|g")
+    fi
+fi
+
 #Start VNC server
 function vnc_start() {
     VNCNUM=11 #CHANGE THIS NUMBER TO WHATEVER VNC SERVER NUMBER YOU PICKED
