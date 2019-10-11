@@ -4,6 +4,7 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # . /Applications/root*/bin/thisroot.sh
 # . /usr/local/bin/thisroot.sh
 . $(brew --prefix)/Cellar/root/6.*/bin/thisroot.sh
+export ROOT_INCLUDE_PATH=$ROOTSYS/include/root/
 
 eval "$(thefuck --alias)"
 
