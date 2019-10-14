@@ -1,0 +1,4 @@
+alias brownnoise='play -c 2 -n synth brownnoise'
+alias whitenoise='play -c 2 -n synth whitenoise'
+alias pinknoise='play -c 2 -n synth pinknoise'
+alias nois='play  -n -n --combine merge synth brownnoise band -n 2500 4000 reverb 20 tremolo 20 .1'
