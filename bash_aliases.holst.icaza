@@ -2,3 +2,12 @@ alias brownnoise='play -c 2 -n synth brownnoise'
 alias whitenoise='play -c 2 -n synth whitenoise'
 alias pinknoise='play -c 2 -n synth pinknoise'
 alias nois='play  -n -n --combine merge synth brownnoise band -n 2500 4000 reverb 20 tremolo 20 .1'
+
+# mount ssh server as fuse filesystem
+# requires sshfs and to have the /Volumes/ssh_volume area
+# usage: ssh-mount ssh_server_address:/path/to/folder
+# paired with the alias ussh, to unmount
+ssh-mount () {
+          sshfs -p 22 $1 /Volumes/ssh_volume -oauto_cache,reconnect,defer_permissions,noappledouble,negative_vncache,volname=sshfs_vol
+}
+alias ussh='umount /Volumes/ssh_volume/'
