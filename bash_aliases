@@ -25,6 +25,7 @@ alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 # alias edit='subl'                         # edit: Opens any file in sublime editor
 # alias c='clear'                           # c: Clear terminal display
+alias fhere='find . -name '                 # find files in our current directory
 alias df='df -hat'
 alias ps='ps aux'
 alias psg='ps | grep -v grep | grep -i  -e '
