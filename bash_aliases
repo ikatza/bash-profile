@@ -3,13 +3,16 @@
 alias cp='cp -iv'                           # careful and verbose
 alias mv='mv -iv'                           # careful and verbose
 alias mkdir='mkdir -pv'                     # create subdirs in necessary, verbose
+alias ln='ln -iv'                           # careful and verbose
 alias ll='ls -tFGlAhp'                      # Preferred 'ls' implementation
 alias folders='ll | grep ^d'
-alias reload='source ~/.bash_profile'
+alias reload='exec env $(which bash) && source $HOME/.bash_profile'
 # alias less='less -FSRXc'                    # Preferred 'less' implementation
-alias les='less'                            # Sloppy typing
 alias lessh='LESSOPEN="| src-hilite-lesspipe.sh %s" less -R '
+alias les='lessh'                           # Sloppy typing
 alias grep='grep --color=auto'              # colorful grep
+alias egrep='egrep --color=auto'            # colorful egrep
+alias fgrep='fgrep --color=auto'            # colorful fgrep
 # cd() { builtin cd "$@"; ll; }             # Always list directory contents upon 'cd'
 alias ~="cd ~"                              # Go Home
 alias g.d="cd $HOME/Githubbies/"
