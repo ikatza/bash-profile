@@ -126,4 +126,3 @@ alias gi='git'  # lazy and typo typing
 # Doesn't work on Debian derived distros. Removing for now.
 #alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 
-# alias ssh="$HOME/.bash/try-mosh.sh $*"
