@@ -10,3 +10,11 @@ bash_version_at_least=4.2.1
 if version_gt $BASH_VERSION $bash_version_at_least; then
     shopt -s direxpand
 fi;
+
+# tmux session tab complete function
+function _tmux_complete_session() {
+    local IFS=$'\n'
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( ${COMPREPLY[@]:-} $(compgen -W "$(tmux -q list-sessions | cut -f 1 -d ':')" -- "${cur}") )
+}
+complete -F _tmux_complete_session tmr

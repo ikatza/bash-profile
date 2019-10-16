@@ -44,8 +44,12 @@ function sk() {                             # kill screen session
 }
 alias tmn='tmux new-session -A -s'          # new tmux session with name, or attach to existing session
 alias tml='tmux list-sessions'              # list running tmux sessions
-function tmr() {                            # reattach tmux to session or the default if no session is given
-    tmux attach-session -t $1 &>/dev/null || tmux attach
+function tmr() {
+    if [ -z "$TMUX" ]; then                 # not in tmux
+        tmux attach-session -t $1 &>/dev/null || tmux attach
+    else                                    # inside tmux
+        tmux switch-client -t $1
+    fi
 }
 alias tmk='tmux kill-session -t'               # kill tmux session
 
