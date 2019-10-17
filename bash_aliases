@@ -4,6 +4,7 @@ alias cp='cp -iv'                           # careful and verbose
 alias mv='mv -iv'                           # careful and verbose
 alias mkdir='mkdir -pv'                     # create subdirs in necessary, verbose
 alias ln='ln -iv'                           # careful and verbose
+alias ls='ls --color=auto -F'
 alias ll='ls -tFGlAhp'                      # Preferred 'ls' implementation
 alias folders='ll | grep ^d'
 alias reload='exec env $(which bash) && source $HOME/.bash_profile'
