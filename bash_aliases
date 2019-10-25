@@ -4,7 +4,6 @@ alias cp='cp -iv'                           # careful and verbose
 alias mv='mv -iv'                           # careful and verbose
 alias mkdir='mkdir -pv'                     # create subdirs in necessary, verbose
 alias ln='ln -iv'                           # careful and verbose
-alias ls='ls --color=auto -F'
 alias ll='ls -tFGlAhp'                      # Preferred 'ls' implementation
 alias folders='ll | grep ^d'
 alias reload='exec env $(which bash) && source $HOME/.bash_profile'
@@ -113,10 +112,12 @@ alias ssh-tunnel='ssh -N -L localhost:9999:localhost:9998 ' # maybe add -f to ha
 alias jupyter-tunnel='jupyter notebook --no-browser --port=9998'
 
 if [[ $os == "Darwin" ]]; then
+    alias ls='ls -FG'
     dush () {
         du -sh $1 | gsort -rh
     }
 elif [[ $os == "Linux" ]]; then
+    alias ls='ls --color=auto -F'
     dush () {
         du -sh $1 | sort -rh
     }
