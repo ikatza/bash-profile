@@ -25,6 +25,20 @@ if [[ "$HOSTNAME" =~ "gpvm" ]]; then
 fi
 
 $HOME/.linuxbrew/opt/git/bin/git --version &> /dev/null || export BREW_WORKING=$?
+if [[ "$HOSTNAME" =~ "build" ]]; then
+    if [[ "$HOSTNAME" =~ "dune" ]]
+    then
+        echo "I'm on a dune build server"
+        export WORK_DIR=/dune/app/users/$USER
+        export DATA_DIR=/dune/data/users/$USER
+    fi
+    if [[ "$HOSTNAME" =~ "sbnd" ]]
+    then
+        echo "I'm on a sbnd build server"
+        export WORK_DIR=/sbnd/app/users/$USER
+        export DATA_DIR=/sbnd/data/users/$USER
+    fi
+fi
 if [[ $BREW_WORKING == 0 ]] ; then
     # eval $(/home/nfs/icaza/.linuxbrew/bin/brew shellenv)
     export PATH=$HOME/.linuxbrew/bin:$PATH
