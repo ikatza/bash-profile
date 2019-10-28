@@ -13,8 +13,8 @@ if [[ "$HOSTNAME" =~ "gpvm" ]]; then
     if [[ "$HOSTNAME" =~ "dune" ]]
     then
         echo "I'm on a dune gpvm server"
-        WORK_DIR=/dune/app/users/$USER
-        DATA_DIR=/dune/data/users/$USER
+        export WORK_DIR=/dune/app/users/$USER
+        export DATA_DIR=/dune/data/users/$USER
     fi
     if [[ "$HOSTNAME" =~ "sbnd" ]]
     then

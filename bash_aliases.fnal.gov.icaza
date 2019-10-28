@@ -3,12 +3,12 @@
 # mirror directory
 if [[ "$HOSTNAME" =~ "gpvm" ]]; then
     if [[ "$PWD" =~ "/app/users/$USER" ]]; then
-	export M=$(echo $PWD | sed -e "s|app/users|data/users|g")
-	export MI=$(echo ${PWD%/*} | sed -e "s|app/users|data/users|g")
+        export M=$(echo $PWD | sed -e "s|app/users|data/users|g")
+        export MI=$(echo ${PWD%/*} | sed -e "s|app/users|data/users|g")
     fi
     if [[ "$PWD" =~ "/data/users/$USER" ]]; then
-	export M=$(echo $PWD | sed -e "s|data/users|app/users|g")
-	export MI=$(echo ${PWD%/*} | sed -e "s|data/users|app/users|g")
+        export M=$(echo $PWD | sed -e "s|data/users|app/users|g")
+        export MI=$(echo ${PWD%/*} | sed -e "s|data/users|app/users|g")
     fi
 fi
 
@@ -17,8 +17,8 @@ function vnc_start() {
     VNCNUM=11 #CHANGE THIS NUMBER TO WHATEVER VNC SERVER NUMBER YOU PICKED
     if [[ `hostname` == *"daq33"* ]]
     then
-	export DISPLAY=localhost:$VNCNUM     #Export the display to point to the VNC server
-	vncserver :$VNCNUM -localhost -fg    #Check if the VNC server is running and start it if not (-localhost mandatory!)
+        export DISPLAY=localhost:$VNCNUM     #Export the display to point to the VNC server
+        vncserver :$VNCNUM -localhost -fg    #Check if the VNC server is running and start it if not (-localhost mandatory!)
     fi
 }
 
@@ -30,28 +30,28 @@ function latest () {
     quals=$2
     version=v`ups list -aK"VERSION" $product $quals | uniq | sed -e 's/v//' -e 's/\"//g' | sort -n | tail -1`
     if [ "X$quals" == "X" ]; then
-	quals=`ups list -aK"QUALIFIERS" $product $version | grep "prof" | grep -v "noifdh" | sed -e 's/\"//g' | uniq | sort -n | tail -1`
-	if [ "X$quals" != "X" ]; then
-	    quals="-q$quals"
-	fi
+        quals=`ups list -aK"QUALIFIERS" $product $version | grep "prof" | grep -v "noifdh" | sed -e 's/\"//g' | uniq | sort -n | tail -1`
+        if [ "X$quals" != "X" ]; then
+            quals="-q$quals"
+        fi
     fi
-    
+
     echo "$product $version $quals"
 }
 
 function sors() {
     if [[ "$HOSTNAME" =~ "daq" && "$HOSTNAME" =~ "sbn" ]]; then
-	source /daq/software/products/setup
-	setup mrb
-	setup `latest ninja`
+        source /daq/software/products/setup
+        setup mrb
+        setup `latest ninja`
     fi
     if [[ "$HOSTNAME" =~ "gpvm" ]]; then
-	if [[ "$HOSTNAME" =~ "dune" ]]; then
-	    source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
-	fi
-	if [[ "$HOSTNAME" =~ "sbnd" ]]; then
-	    source /cvmfs/sbnd.opensciencegrid.org/products/sbnd/setup_sbnd.sh
-	fi	
+        if [[ "$HOSTNAME" =~ "dune" ]]; then
+            source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
+        fi
+        if [[ "$HOSTNAME" =~ "sbnd" ]]; then
+            source /cvmfs/sbnd.opensciencegrid.org/products/sbnd/setup_sbnd.sh
+        fi
     fi
     if [[ "$HOSTNAME" =~ "build" ]]; then
         if [[ "$HOSTNAME" =~ "dune" ]]; then
