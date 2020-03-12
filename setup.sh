@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 
 #this script will setup bash specifics using the configs in this repo
 
@@ -11,7 +11,7 @@ else
 fi
 
 
-files="bash-git-prompt bash_profile bash_login bash_aliases bash_aliases.$host.$who_am_i bashrc profile profile.$host.$who_am_i bash_completion bash_logout screenrc"
+files="bash-git-prompt bash_profile bash_login bash_aliases bash_aliases.$host.$who_am_i bashrc profile profile.$host.$who_am_i bash_completion bash_logout screenrc tigrc"
 date=`date +"%Y%m%d"`
 
 mkdir -p -v  $HOME/screenlogs
