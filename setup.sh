@@ -11,7 +11,7 @@ else
 fi
 
 
-files="bash-git-prompt bash_profile bash_login bash_aliases bash_aliases.$host.$who_am_i bashrc profile profile.$host.$who_am_i bash_completion bash_logout screenrc tigrc"
+files="bash-git-prompt bash_profile bash_login bash_aliases bash_aliases.$host.$who_am_i bashrc profile profile.$host.$who_am_i bash_completion bash_logout screenrc tigrc latexmkrc"
 date=`date +"%Y%m%d"`
 
 mkdir -p -v  $HOME/screenlogs
