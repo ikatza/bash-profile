@@ -73,4 +73,21 @@ function certifyme() {
     voms-proxy-init -noregen -rfc -voms 'fermilab:/fermilab/sbnd/Role=Analysis'
 }
 
+function init_profiler(){
+    outputfile=${1:-performance.prof}
+    outputfile_heap=${1:-performance.heap}
+    export PERFTOOLS=/grid/fermiapp/nova/perftools
+    source $PERFTOOLS/perftools.sh
+    export DATAPATH=$PWD
+    # export HEAPCHECK=1
+    export HEAPPROFILE=$PWD/$outputfile_heap
+    export CPUPROFILE=$PWD/$outputfile
+    echo -e "Run like so for CPU only:\n  \tmrbslp; env LD_PRELOAD=$PERFTOOLS/lib/libprofiler.so lar -c myfcl.fcl ..."
+    echo -e "Run like so for CPU and MEMORY:\n  \tmrbslp; env LD_PRELOAD=$PERFTOOLS/lib/libtcmalloc_and_profiler.so lar -c myfcl.fcl ..."
+    echo "To analyse the output:"
+    echo -e "\t pprof --pdf \`which lar\` $outputfile > $outputfile.pdf"
+    echo -e "\t pprof --pdf \`which lar\` $outputfile_heap.0189.heap > $outputfile_heap.pdf"
+    echo -e "\t pprof --text \`which lar\` $outputfile"
+}
+
 alias ninja_='ninja -C ${MRB_BUILDDIR} -k 0 install | grep --invert-match "Up-to-date" '
