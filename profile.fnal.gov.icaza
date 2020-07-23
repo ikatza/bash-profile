@@ -6,21 +6,21 @@ export PATH=$HOME/bin:$PATH
 if [[ "$HOSTNAME" =~ "daq" && "$HOSTNAME" =~ "sbn" ]]
 then
     echo "I'm on a sbnd daq server"
-    export WORK_DIR="$HOME/work"
+    export APP="$HOME/work"
 fi
 
 if [[ "$HOSTNAME" =~ "gpvm" ]]; then
     if [[ "$HOSTNAME" =~ "dune" ]]
     then
         echo "I'm on a dune gpvm server"
-        export WORK_DIR=/dune/app/users/$USER
-        export DATA_DIR=/dune/data/users/$USER
+        export APP=/dune/app/users/$USER/work
+        export DATA=/dune/data/users/$USER/work
     fi
     if [[ "$HOSTNAME" =~ "sbnd" ]]
     then
         echo "I'm on a sbnd gpvm server"
-        export WORK_DIR=/sbnd/app/users/$USER
-        export DATA_DIR=/sbnd/data/users/$USER
+        export APP=/sbnd/app/users/$USER/work
+        export DATA=/sbnd/data/users/$USER/work
     fi
 fi
 
@@ -29,14 +29,14 @@ if [[ "$HOSTNAME" =~ "build" ]]; then
     if [[ "$HOSTNAME" =~ "dune" ]]
     then
         echo "I'm on a dune build server"
-        export WORK_DIR=/dune/app/users/$USER
-        export DATA_DIR=/dune/data/users/$USER
+        export APP=/dune/app/users/$USER/work
+        export DATA=/dune/data/users/$USER/work
     fi
     if [[ "$HOSTNAME" =~ "sbnd" ]]
     then
         echo "I'm on a sbnd build server"
-        export WORK_DIR=/sbnd/app/users/$USER
-        export DATA_DIR=/sbnd/data/users/$USER
+        export APP=/sbnd/app/users/$USER/work
+        export DATA=/sbnd/data/users/$USER/work
     fi
 fi
 if [[ $BREW_WORKING == 0 ]] ; then
