@@ -45,15 +45,7 @@ function sors() {
         setup mrb
         setup `latest ninja`
     fi
-    if [[ "$HOSTNAME" =~ "gpvm" ]]; then
-        if [[ "$HOSTNAME" =~ "dune" ]]; then
-            source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
-        fi
-        if [[ "$HOSTNAME" =~ "sbnd" ]]; then
-            source /cvmfs/sbnd.opensciencegrid.org/products/sbnd/setup_sbnd.sh
-        fi
-    fi
-    if [[ "$HOSTNAME" =~ "build" ]]; then
+    if [[ "$HOSTNAME" =~ "gpvm" || "$HOSTNAME" =~ "build" ]]; then
         if [[ "$HOSTNAME" =~ "dune" ]]; then
             source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
         fi
@@ -63,4 +55,9 @@ function sors() {
     fi
 }
 
+function sorss() {
+    source /cvmfs/uboone.opensciencegrid.org/products/setup
+    source /cvmfs/sbnd.opensciencegrid.org/products/sbnd/setup
+    source /cvmfs/icarus.opensciencegrid.org/products/icarus/setup_icarus.sh
+}
 alias ninja_='ninja -C ${MRB_BUILDDIR} -k 0 install | grep --invert-match "Up-to-date" '
