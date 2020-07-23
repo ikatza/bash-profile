@@ -41,7 +41,7 @@ alias cic='set completion-ignore-case On'   # cic: Make tab-completion case-inse
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd: Makes new Dir and jumps inside
 screenlog() { mkdir -p screenlogs && screen -U -L; }
 alias sn='screen -S'                        # new screen with name
-alias sl='screen -ls'                       # list running screen sessions
+alias sll='screen -ls'                       # list running screen sessions
 alias sr='screen -x'                        # reattach screen
 function sk() {                             # kill screen session
     screen -S "$1" -X quit
