@@ -14,11 +14,11 @@ fi
 files="bash-git-prompt bash_profile bash_login bash_aliases bash_aliases.$host.$who_am_i bashrc profile profile.$host.$who_am_i bash_completion bash_logout screenrc tigrc latexmkrc"
 date=`date +"%Y%m%d"`
 
-mkdir -p -v  $HOME/screenlogs
-if [ -d $HOME/screenlogs ]; then
-    echo "Creating $HOME/screenlogs dir "
-    mkdir -p $HOME/screenlogs
-fi
+# mkdir -p -v  $HOME/screenlogs
+# if [ -d $HOME/screenlogs ]; then
+#     echo "Creating $HOME/screenlogs dir "
+#     mkdir -p $HOME/screenlogs
+# fi
 
 for file in $files; do
     if [ -h $HOME/.$file ]; then
