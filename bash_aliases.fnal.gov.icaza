@@ -66,4 +66,11 @@ function sorss() {
     source /cvmfs/sbnd.opensciencegrid.org/products/sbnd/setup
     source /cvmfs/icarus.opensciencegrid.org/products/icarus/setup_icarus.sh
 }
+
+function certifyme() {
+    setup cigetcert # (if not already there)
+    cigetcert -s 'fifebatch.fnal.gov' # ask for a certificate
+    voms-proxy-init -noregen -rfc -voms 'fermilab:/fermilab/sbnd/Role=Analysis'
+}
+
 alias ninja_='ninja -C ${MRB_BUILDDIR} -k 0 install | grep --invert-match "Up-to-date" '
